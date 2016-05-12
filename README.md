@@ -2,4 +2,68 @@
 
 ## Quick start
 
+1. Edit the machines.yaml file
+  1. Add a name
+  2. Specify a box
+  3. Specify amount of RAM
+  4. Specify number of vCPUs
+  5. ```vagrant up```
+eg.
+```
+---
+- name: "default"
+  box: "centos/7"
+  nic:
+  #  - {type: "", ip: ""}
+  port:
+  #  - {guest: "80", host: "8080"}
+  #  - {guest: "443", host: "4443"}
+  ram: 1024
+  cpu: 1
+  #nested:  
+```
+## Customising NICs
 
+1. Specify a type eg. Private Network, Public Network
+  1. Specify IP.
+eg.
+```
+---
+- name: ""
+  box: "centos/7"
+  nic:
+    - {type: "Private Network", ip: "192.168.1.10"}
+  port:
+  #  - {guest: "80", host: "8080"}
+  #  - {guest: "443", host: "4443"}
+  ram:  
+  cpu:
+  #nested:  
+```
+
+## Port Forwarding
+
+1. Provide a hash of the guest port and the host port.
+
+eg.
+```
+---
+- name: ""
+  box: "centos/7"
+  nic:
+  #  - {type: "", ip: ""}
+  port:
+    - {guest: "80", host: "8080"}
+    - {guest: "443", host: "4443"}
+  ram:  
+  cpu:
+  #nested:  
+```
+
+## Nested ?
+
+This is a feature of the vagrant-libvirt external provider. It allows for nested hypervisors.
+
+## Supported providers
+
+Currently onl supports vagrant-libvirt because I am lazy. With a little effort all other supported providers will work.
