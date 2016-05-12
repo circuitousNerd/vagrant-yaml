@@ -12,6 +12,7 @@ Vagrant.configure(2) do |config|
       machine.vm.box = machines["box"]
       machine.vm.hostname = machines["name"]
       machine.vm.synced_folder './', '/vagrant' 
+      
       if Vagrant.has_plugin?("vagrant-cachier")
         config.cache.scope = :box
       end
@@ -54,5 +55,4 @@ Vagrant.configure(2) do |config|
     puppet.hiera_config_path = "hiera.yaml"
     puppet.working_directory = "/tmp/vagrant-puppet"
   end
-
 end
