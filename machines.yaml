@@ -1,0 +1,11 @@
+---
+- name: ""
+  box: "centos/7"
+  nic:
+    - {type: "", ip: ""}
+  port:
+    - {guest: "80", host: "8080"}
+    - {guest: "443", host: "4443"}
+  ram:  
+  cpu: 
+  nested:  
