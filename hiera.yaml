@@ -1,0 +1,8 @@
+---
+  :backends:
+    - yaml
+  :yaml:
+    :datadir: "/tmp/vagrant-puppet/hieradata"
+    :hierarchy:
+      - "nodes/%{::fqdn}"
+      - "common"
