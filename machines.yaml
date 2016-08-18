@@ -1,11 +1,10 @@
 ---
 - name: ""
-  box: "centos/7"
+  box: "puppetlabs/centos-7.2-64-nocm"
   nic:
-    - {type: "", ip: ""}
-  port:
-    - {guest: "80", host: "8080"}
-    - {guest: "443", host: "4443"}
-  ram:  
-  cpu: 
-  nested:  
+    - {type: "private_network", ip: "10.10.0.10"}
+  #port:
+  #  - {guest: "80", host: "8080"}
+  #  - {guest: "443", host: "4443"}
+  ram: 1024  
+  cpu: 1

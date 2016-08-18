@@ -20,7 +20,6 @@ eg.
   #  - {guest: "443", host: "4443"}
   ram: 1024
   cpu: 1
-  #nested:  
 ```
 ## Customising NICs
 
@@ -38,7 +37,6 @@ eg.
   #  - {guest: "443", host: "4443"}
   ram:  
   cpu:
-  #nested:  
 ```
 
 ## Port Forwarding
@@ -57,13 +55,9 @@ eg.
     - {guest: "443", host: "4443"}
   ram:  
   cpu:
-  #nested:  
 ```
 
-## Nested ?
-
-This is a feature of the vagrant-libvirt external provider. It allows for nested hypervisors.
 
 ## Supported providers
 
-Currently onl supports vagrant-libvirt because I am lazy. With a little effort all other supported providers will work.
+Currently onl supports virtualbox because I am lazy. With a little effort all other supported providers will work.
