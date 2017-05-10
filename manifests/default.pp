@@ -1,4 +1,5 @@
 node default {
-  package { ['vim', 'htop']:
+  package { ['vim-enhanced', 'htop', 'epel-release]:
     ensure => latest,
   }
+}
