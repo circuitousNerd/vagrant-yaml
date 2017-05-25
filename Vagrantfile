@@ -26,7 +26,7 @@ Vagrant.configure(2) do |config|
         port.each do |port|
           machine.vm.network "forwarded_port", guest: port["guest"], host: port["host"]
         end
-       end
+      end
       machine.vm.provider "virtualbox" do |vb|
         vb.memory = machines["ram"]
         vb.cpus = machines["cpu"]

@@ -1,5 +1,5 @@
 class base {
-  package { ['epel-release', 'vim-enhanced', 'htop', 'nmap']:
+  package { ['epel-release', 'vim-enhanced', 'htop', 'nmap', 'git']:
     ensure => latest,
   }
 
