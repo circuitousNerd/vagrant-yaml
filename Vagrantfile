@@ -7,15 +7,14 @@ machines = YAML.load_file(File.join(File.dirname(__FILE__), 'machines.yaml'))
 Vagrant.configure(2) do |config|
 
   machines.each do |machines|
+
     config.vm.define machines["name"] do |machine|
-    if Vagrant.has_plugin?("vagrant-cachier")
-      # Configure cached packages to be shared between instances of the same base box.
-      # More info on http://fgrehm.viewdocs.io/vagrant-cachier/usage
-      config.cache.scope = :box
-    end
       machine.vm.box = machines["box"]
       machine.vm.hostname = machines["name"]
       machine.vm.synced_folder './', '/vagrant'
+      if Vagrant.has_plugin?("vagrant-cachier")
+        config.cache.scope = :box
+      end
 
       # If extra NICs are defined, create them
       if machines["nic"]
@@ -31,25 +30,29 @@ Vagrant.configure(2) do |config|
         port.each do |port|
           machine.vm.network "forwarded_port", guest: port["guest"], host: port["host"]
         end
-       end
+      end
       machine.vm.provider "virtualbox" do |vb|
         vb.memory = machines["ram"]
-        vb.cpus = machines["cpu"]
+        vb.customize ["modifyvm", :id, "--ioapic", "on"]
+        vb.customize ["modifyvm", :id, "--cpus", machines['cpu']]
       end
     end
     config.vm.provision "hosts", :sync_hosts => true
   end
 
   config.vm.provision "shell", inline: <<-SHELL
-    sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+    sudo yum install -y https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
     sudo yum -y install puppet
   SHELL
 
   config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "manifests"
+    puppet.environment_path = 'puppet/environment'
+    puppet.environment = 'development'
+    puppet.manifests_path = "puppet/environment/development/manifests"
     puppet.manifest_file = "default.pp"
     puppet.module_path = "modules"
     puppet.hiera_config_path = "hiera.yaml"
     puppet.working_directory = "/tmp/vagrant-puppet"
   end
+
 end
