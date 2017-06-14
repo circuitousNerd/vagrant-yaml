@@ -7,10 +7,14 @@ machines = YAML.load_file(File.join(File.dirname(__FILE__), 'machines.yaml'))
 Vagrant.configure(2) do |config|
 
   machines.each do |machines|
+
     config.vm.define machines["name"] do |machine|
       machine.vm.box = machines["box"]
       machine.vm.hostname = machines["name"]
       machine.vm.synced_folder './', '/vagrant' 
+      if Vagrant.has_plugin?("vagrant-cachier")
+        config.cache.scope = :box
+      end
       
       # If extra NICs are defined, create them
       if machines["nic"]
@@ -29,7 +33,8 @@ Vagrant.configure(2) do |config|
       end
       machine.vm.provider "virtualbox" do |vb|
         vb.memory = machines["ram"]
-        vb.cpus = machines["cpu"]
+        vb.customize ["modifyvm", :id, "--ioapic", "on"]
+        vb.customize ["modifyvm", :id, "--cpus", machines['cpu']]
       end
     end
     config.vm.provision "hosts", :sync_hosts => true
