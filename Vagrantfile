@@ -8,10 +8,15 @@ Vagrant.configure(2) do |config|
 
   machines.each do |machines|
     config.vm.define machines["name"] do |machine|
+    if Vagrant.has_plugin?("vagrant-cachier")
+      # Configure cached packages to be shared between instances of the same base box.
+      # More info on http://fgrehm.viewdocs.io/vagrant-cachier/usage
+      config.cache.scope = :box
+    end
       machine.vm.box = machines["box"]
       machine.vm.hostname = machines["name"]
-      machine.vm.synced_folder './', '/vagrant' 
-      
+      machine.vm.synced_folder './', '/vagrant'
+
       # If extra NICs are defined, create them
       if machines["nic"]
         nic = machines["nic"]
@@ -36,9 +41,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision "shell", inline: <<-SHELL
-    sudo yum -y update
-    sudo yum -y install epel-release
-    sudo rpm -ivh sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+    sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
     sudo yum -y install puppet
   SHELL
 
