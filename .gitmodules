@@ -1,0 +1,3 @@
+[submodule "stdlib"]
+	path = modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib

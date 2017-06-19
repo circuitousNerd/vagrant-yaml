@@ -9,6 +9,9 @@ Vagrant.configure(2) do |config|
   machines.each do |machines|
 
     config.vm.define machines["name"] do |machine|
+      if Vagrant.has_plugin?("vagrant-cachier")
+        config.cache.scope = :box
+      end
       machine.vm.box = machines["box"]
       machine.vm.hostname = machines["name"]
       machine.vm.synced_folder './', '/vagrant'
