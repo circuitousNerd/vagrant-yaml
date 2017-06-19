@@ -1,3 +1,4 @@
 .vagrant/
 modules/
 config
+modules/*/spec/fixtures
