@@ -1,10 +1,25 @@
 ---
-- name: ""
+- name: "puppetmaster01"
   box: "puppetlabs/centos-7.2-64-nocm"
   nic:
-    - {type: "private_network", ip: "10.10.0.10"}
-  #port:
-  #  - {guest: "80", host: "8080"}
-  #  - {guest: "443", host: "4443"}
-  ram: 1024  
+    - {type: "private_network", ip: "10.100.0.10"}
+  ram: 4096 
+  cpu: 2
+- name: "vault01"
+  box: "puppetlabs/centos-7.2-64-nocm"
+  nic:
+    - {type: "private_network", ip: "10.100.0.11"}
+  ram: 1024
+  cpu: 1
+- name: "vault02"
+  box: "puppetlabs/centos-7.2-64-nocm"
+  nic:
+    - {type: "private_network", ip: "10.100.0.12"}
+  ram: 1024
+  cpu: 1
+- name: "vault03"
+  box: "puppetlabs/centos-7.2-64-nocm"
+  nic:
+    - {type: "private_network", ip: "10.100.0.13"}
+  ram: 1024
   cpu: 1

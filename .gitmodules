@@ -1,3 +1,9 @@
-[submodule "stdlib"]
-	path = modules/stdlib
+[submodule "modules/archive"]
+	path = modules/archive
+	url = https://github.com/voxpupuli/puppet-archive
+[submodule "modules/consul"]
+	path = modules/consul
+	url = https://github.com/solarkennedy/puppet-consul
+[submodule "modules/archive"]
+	path = modules/archive
 	url = https://github.com/puppetlabs/puppetlabs-stdlib
