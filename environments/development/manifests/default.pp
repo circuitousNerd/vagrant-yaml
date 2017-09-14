@@ -1,18 +1,16 @@
-node /default/ {
+class base {
+  package { ['epel-release', 'vim-enhanced', 'htop', 'nmap', 'git']:
+    ensure => latest,
+  }
 
+   service { 'firewalld':
+     ensure => stopped,
+     enable => false,
+   }
+
+  Package['epel-release'] -> Package <| title != 'epel-release' |>
 }
 
-node /puppet/ {
-
-  package { 'puppetserver':
-    ensure => 'latest',
-  }
-
-  service { 'puppetserver':
-    enable => true,
-    ensure => running,
-  }
-
-  Package['puppetserver']
-  -> Service['puppetserver']
+node /default/ {
+  require base
 }
