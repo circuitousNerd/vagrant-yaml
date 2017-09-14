@@ -44,6 +44,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
     sudo yum install -y https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
     sudo yum -y install puppet
+    sudo systemctl restart network
   SHELL
 
   config.vm.provision "puppet" do |puppet|
