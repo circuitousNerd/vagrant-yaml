@@ -48,9 +48,9 @@ Vagrant.configure(2) do |config|
   SHELL
 
   config.vm.provision "puppet" do |puppet|
-    puppet.environment_path = 'puppet/environment'
+    puppet.environment_path = 'environments'
     puppet.environment = 'development'
-    puppet.manifests_path = "puppet/environment/development/manifests"
+    puppet.manifests_path = "environments/development/manifests"
     puppet.manifest_file = "default.pp"
     puppet.module_path = "modules"
     puppet.hiera_config_path = "hiera.yaml"
