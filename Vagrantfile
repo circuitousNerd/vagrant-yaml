@@ -52,7 +52,7 @@ Vagrant.configure(2) do |config|
     puppet.environment = 'development'
     puppet.manifests_path = "environments/development/manifests"
     puppet.manifest_file = "default.pp"
-    puppet.module_path = "modules"
+    puppet.module_path = "environments/development/modules"
     puppet.hiera_config_path = "hiera.yaml"
     puppet.working_directory = "/tmp/vagrant-puppet"
   end
