@@ -13,4 +13,6 @@ class base {
 
 node /default/ {
   require base
+
+  include 'docker'
 }

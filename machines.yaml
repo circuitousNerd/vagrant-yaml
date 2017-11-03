@@ -1,10 +1,7 @@
 ---
-- name: ""
+- name: "docker01"
   box: "puppetlabs/centos-7.2-64-nocm"
   nic:
-    - {type: "private_network", ip: "10.10.0.10"}
-  #port:
-  #  - {guest: "80", host: "8080"}
-  #  - {guest: "443", host: "4443"}
+    - {type: "private_network", ip: "10.13.37.10"}
   ram: 1024  
   cpu: 1
