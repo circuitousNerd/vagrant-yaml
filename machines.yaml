@@ -1,6 +1,6 @@
 ---
-- name: ""
-  box: "puppetlabs/centos-7.2-64-nocm"
+- name: "kafka01"
+  box: "fedora/28-cloud-base"
   nic:
     - {type: "private_network", ip: "10.10.0.10"}
   #port:

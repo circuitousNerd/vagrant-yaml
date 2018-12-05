@@ -32,10 +32,9 @@ Vagrant.configure(2) do |config|
           machine.vm.network "forwarded_port", guest: port["guest"], host: port["host"]
         end
       end
-      machine.vm.provider "virtualbox" do |vb|
+      machine.vm.provider "libvirt" do |vb|
         vb.memory = machines["ram"]
-        vb.customize ["modifyvm", :id, "--ioapic", "on"]
-        vb.customize ["modifyvm", :id, "--cpus", machines['cpu']]
+        vb.cpus = machines['cpu']
       end
     end
     config.vm.provision "hosts", :sync_hosts => true
